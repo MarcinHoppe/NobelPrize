@@ -21,7 +21,7 @@ function get(url, cb) {
     });
 }
 
-const NobelPrizeLaureatesParser = require('../lib');
+const Parser = require('../lib');
 
 // Fetch Nobel Prize data.
 get('http://masterdataapi.nobelprize.org/2.0/laureates', (err, data) => {
@@ -32,7 +32,7 @@ get('http://masterdataapi.nobelprize.org/2.0/laureates', (err, data) => {
     }
 
     // Parse the data.
-    const parser = new NobelPrizeLaureatesParser(data);
+    const parser = new Parser(data);
 
     // Print laureates in a given year.
     console.table(parser.inYear(2001));
