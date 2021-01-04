@@ -1,12 +1,20 @@
-const app = require('express');
+const app = require('express')();
 
-const NobelPrizeLaureatesParser = require('../lib');
+const Parser = require('./lib');
 
 app.post('/', (req, res) => {
-    const input = req.body.replace(/^\s+|\s+$/g, '');
-    eval(input);
-    const parser = new NobelPrizeLaureatesParser(input);
-    res.json(parser.inYear(2001));
+    let resBody;
+    try {
+        resBody = new Parser(req.body).inYear(2001);
+    }
+    catch (error) {
+        res.statusCode = 500;
+        res.setHeader("Content-Type", "text/plain");
+        res.end(error.stack);
+        return;
+    }
+    res.statusCode = 200;
+    res.json(resBody);
 });
 
 app.listen(3000, () => {
