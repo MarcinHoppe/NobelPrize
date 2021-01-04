@@ -8,3 +8,7 @@ app.post('/', (req, res) => {
     const parser = new NobelPrizeLaureatesParser(input);
     res.json(parser.inYear(2001));
 });
+
+app.listen(3000, () => {
+    console.log('Running!');
+});
