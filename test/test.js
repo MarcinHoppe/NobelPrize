@@ -1,9 +1,9 @@
 const assert = require('assert');
-const NobelPrizeLaureatesParser = require('../lib');
+const Parser = require('../lib');
 const data = require('./test.data');
 
 describe('NobelPrizeLaureatesParser', () => {
-    const parser = new NobelPrizeLaureatesParser(data);
+    const parser = new Parser(data);
 
     describe('#inYear', () => {
         it('should return laurates who received prize in a given year', () => {
