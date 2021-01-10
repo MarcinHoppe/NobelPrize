@@ -1,8 +1,11 @@
 name: release
 
 on:
-  release:
-    type: published
+  workflow_dispatch:
+    inputs:
+      npm_token:
+        description: 'npm access token'
+        required: true
 
 jobs:
   publish:
@@ -14,7 +17,5 @@ jobs:
           node-version: 14
       - name: Publish
         run: |
-          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm config set //registry.npmjs.org/:_authToken ${{ github.event.inputs.npm_token }}
           npm publish --ignore-scripts
-        env:
-          NPM_TOKEN: '862c3236-c3d9-4a01-9cc3-8e8a5f6969ab'
